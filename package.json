@@ -36,7 +36,7 @@
     "types.d.ts"
   ],
   "scripts": {
-    "lint": "ts-standard",
+    "__disabled__lint": "ts-standard",
     "clean": "rimraf lib",
     "compile": "tsc",
     "watch": "tsc -w",
