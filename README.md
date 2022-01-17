@@ -21,6 +21,27 @@
 
 ## Introduction
 
+Ozeebee's fork of [caz](https://github.com/zce/caz) template-based project generator / scaffolding tool.
+
+Goal of the fork: 
+
+- [x] Allow **optional** installation of template dependencies (templates don't depend anymore on Caz dependencies -- unless you want to)
+- [x] Report error when template loading fails because of a module error
+
+To install template dependencies, pass the `-t` or `--tpldeps` flag on the command line.  
+If you use this option, you **must not** share dependencies of your template with caz ones as described [here](https://github.com/zce/caz/blob/main/docs/create-template.md#dependencies).
+
+### Fork motivation
+
+The author(s) of [caz](https://github.com/zce/caz) prefer not to install template dependencies to "ensure that the templates are simple and take less space" (as described [here](https://github.com/zce/caz/blob/main/docs/create-template.md#dependencies)).
+
+While this is a noble goal and may accomodate simple use cases, it means **you cannot use any third party library** except the ones caz uses by itself (and provided you implement their ['trick'](https://github.com/zce/caz/blob/main/docs/create-template.md?plain=1#L551) to re-use their dependencies).  
+This can be very limitating for more sophisticated templates or ones that just need one or two additional libraries.
+
+Therefore, this forks allows the **optional** installation of template dependencies while keeping the original behaviour if this is not needed.
+
+---
+
 CAZ (**C**reate **A**pp **Z**en)
 
 It's a a simple template-based Scaffolding tools for my personal productivity, inspired by [Yeoman](https://yeoman.io) &amp; [Vue CLI 2](https://npm.im/vue-cli) &amp; etc.
@@ -48,26 +69,42 @@ _For more introduction, please refer to the [How it works](#how-it-works)._
 ## Table of Contents
 
 - [Introduction](#introduction)
+  - [Fork motivation](#fork-motivation)
   - [Features](#features)
+- [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Quick Start](#quick-start)
+    - [Options](#options)
 - [Recipes](#recipes)
   - [GitHub Repo Templates](#github-repo-templates)
+    - [Use Custom templates](#use-custom-templates)
   - [Local Templates](#local-templates)
   - [Remote ZIP Templates](#remote-zip-templates)
   - [Offline Mode](#offline-mode)
+  - [Prompts Override](#prompts-override)
+  - [Debug Mode](#debug-mode)
   - [List Available Templates](#list-available-templates)
+    - [Arguments](#arguments)
+    - [Options](#options-1)
   - [Official Templates](#official-templates)
 - [Advanced](#advanced)
   - [Create Your Template](#create-your-template)
   - [Configuration](#configuration)
   - [Create Your Scaffold](#create-your-scaffold)
 - [References](#references)
+  - [caz(template, project?, options?)](#caztemplate-project-options)
+    - [template](#template)
+    - [project](#project)
+    - [options](#options-2)
+      - [force](#force)
+      - [offline](#offline)
+      - [[key: string]](#key-string)
 - [Motivation](#motivation)
 - [About](#about)
   - [How It Works](#how-it-works)
+    - [Main Workflow](#main-workflow)
   - [Built With](#built-with)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)

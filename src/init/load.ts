@@ -1,10 +1,10 @@
+import { exec } from '../core'
 import { Context } from './types'
 
 /**
  * Load template config.
  * @todo
  * - Adapt to any repository?
- * - Template dependencies not found.
  * - Check template is available.
  */
 export default async (ctx: Context): Promise<void> => {
@@ -12,6 +12,20 @@ export default async (ctx: Context): Promise<void> => {
   ctx.config.name = ctx.template
 
   try {
+    // install Template deps ? (XXX: move this into its own middleware ?)
+    if (ctx.options.tpldeps) {
+      try {
+        ctx.options.debug === true && console.log('Installing template dependencies ...')
+        const client = 'npm'
+        /* istanbul ignore next */
+        const cmd = process.platform === 'win32' ? client + '.cmd' : client
+        await exec(cmd, ['install'], { cwd: ctx.src, stdio: 'inherit' })
+        ctx.options.debug === true && console.log('done.')
+      } catch (e) {
+        throw new Error('Install template dependencies failed.')
+      }
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mod = require(ctx.src)
 
@@ -20,9 +34,12 @@ export default async (ctx: Context): Promise<void> => {
     }
 
     Object.assign(ctx.config, mod)
-  } catch (e) {
-    if (e.code === 'MODULE_NOT_FOUND') return
-    e.message = `Invalid template: ${e.message as string}`
+  } catch (e: any) {
+    if (e.code === 'MODULE_NOT_FOUND' && ctx.options.debug !== true)
+      throw new Error(`Could not load template module [${e.message.split('\n')[0]}] 
+        Did you load template dependencies with \`-t\` flag ? 
+        Use --debug option for more info`)
+
     throw e
   }
 }

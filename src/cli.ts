@@ -8,6 +8,7 @@ cli
   .command('<template> [project]', 'Create new project from a template')
   .option('-f, --force', 'Overwrite if the target exists')
   .option('-o, --offline', 'Try to use an offline template')
+  .option('-t, --tpldeps', 'Install template dependencies')
   // .option('-d, --debug', 'Output detailed exception when exception occurs')
   .allowUnknownOptions() // for prompts override.
   .example('  # with an official template')

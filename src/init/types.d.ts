@@ -11,6 +11,11 @@ export interface Options {
    * @default false
    */
   offline?: boolean
+  /**
+   * Install template dependencies ?
+   * @default false
+   */
+  tpldeps?: boolean
 }
 
 /**

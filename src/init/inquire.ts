@@ -63,7 +63,7 @@ export const processor = (ctx: Context) => (item: PromptObject) => {
  */
 export default async (ctx: Context): Promise<void> => {
   // require node >= v8.3.0
-  console.clear()
+  ctx.options.debug !== true && console.clear()
 
   // default prompts
   if (ctx.config.prompts == null) {

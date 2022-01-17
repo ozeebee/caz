@@ -2,7 +2,8 @@
 
 node_modules
 
-/lib
+# fork not published on npm, so we have to push the transpiled JavaScript
+#/lib
 
 /coverage
 /test/.temp
