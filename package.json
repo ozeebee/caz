@@ -30,9 +30,7 @@
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "bin": {
-    "caz": "bin/caz.js"
-  },
+  "bin": "bin/caz.js",
   "files": [
     "lib",
     "types.d.ts"
