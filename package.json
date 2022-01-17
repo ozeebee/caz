@@ -36,13 +36,13 @@
     "types.d.ts"
   ],
   "scripts": {
-    "__disabled__lint": "ts-standard",
+    "lint": "ts-standard",
     "clean": "rimraf lib",
     "compile": "tsc",
     "watch": "tsc -w",
-    "build": "npm run clean && npm run compile",
+    "_build": "npm run clean && npm run compile",
     "test": "jest --coverage",
-    "__disabled__prepare": "husky install .github/husky"
+    "prepare": "husky install .github/husky"
   },
   "commitlint": {
     "extends": [

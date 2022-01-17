@@ -40,6 +40,17 @@ This can be very limitating for more sophisticated templates or ones that just n
 
 Therefore, this forks allows the **optional** installation of template dependencies while keeping the original behaviour if this is not needed.
 
+## Usage
+
+```npx ozeebee/caz [template] -t```
+
+## Internals
+
+There is a [bug in npm/npx](https://github.com/npm/cli/issues/4003) that makes the above command fail if there is a script called `build` in `package.json` (which is the case).  
+This happens only when running npx on a remote repo.
+
+That's why the script has been renamed to `build_` (until this is fixed).
+
 ---
 
 CAZ (**C**reate **A**pp **Z**en)
@@ -70,6 +81,8 @@ _For more introduction, please refer to the [How it works](#how-it-works)._
 
 - [Introduction](#introduction)
   - [Fork motivation](#fork-motivation)
+- [Usage](#usage)
+- [Internals](#internals)
   - [Features](#features)
 - [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
