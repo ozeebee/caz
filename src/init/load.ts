@@ -1,5 +1,6 @@
 import { exec } from '../core'
 import { Context } from './types'
+import ora from 'ora'
 
 /**
  * Load template config.
@@ -14,14 +15,15 @@ export default async (ctx: Context): Promise<void> => {
   try {
     // install Template deps ? (XXX: move this into its own middleware ?)
     if (ctx.options.tpldeps) {
+      const spinner = ora('Installing template dependencies...').start()
       try {
-        ctx.options.debug === true && console.log('Installing template dependencies ...')
         const client = 'npm'
         /* istanbul ignore next */
         const cmd = process.platform === 'win32' ? client + '.cmd' : client
         await exec(cmd, ['install'], { cwd: ctx.src, stdio: 'inherit' })
-        ctx.options.debug === true && console.log('done.')
+        spinner.succeed('Template dependencies installed.')
       } catch (e) {
+        spinner.stop()
         throw new Error('Install template dependencies failed.')
       }
     }

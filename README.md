@@ -44,12 +44,20 @@ Therefore, this forks allows the **optional** installation of template dependenc
 
 ```npx ozeebee/caz [template] -t```
 
+## Build and publish
+
+This fork is not published to the npm registry.
+So, to use it from Github with `npx`, we have to commit the transpiled code as well.
+
+1. Build with `npm run build_`
+2. Commit and publish
+
 ## Internals
 
-There is a [bug in npm/npx](https://github.com/npm/cli/issues/4003) that makes the above command fail if there is a script called `build` in `package.json` (which is the case).  
+There is a [bug in npm/npx](https://github.com/npm/cli/issues/4003) that makes the `npx` command fail with a Github repo if there is a script called `build` or `prepare` in `package.json` (which is the case).  
 This happens only when running npx on a remote repo.
 
-That's why the script has been renamed to `build_` (until this is fixed).
+That's the reason why these npm scripts have been renamed to `build_` and `prepare_` (until this bug is fixed in npx).
 
 ---
 
@@ -82,6 +90,7 @@ _For more introduction, please refer to the [How it works](#how-it-works)._
 - [Introduction](#introduction)
   - [Fork motivation](#fork-motivation)
 - [Usage](#usage)
+- [Build and publish](#build-and-publish)
 - [Internals](#internals)
   - [Features](#features)
 - [Table of Contents](#table-of-contents)
